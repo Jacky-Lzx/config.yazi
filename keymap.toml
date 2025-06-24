@@ -83,7 +83,7 @@ keymap = [
 	{ on = "S",         run = "shell --block -- fish",       desc = "Open a terminal"                 },
 	{ on = "C",         run = "shell --block -- nvim",           desc = "Open current folder in Neovim"  },
 	{ on = ["c", "c"],  run = "shell -- code $@",          desc = "Open selected file in VS Code"   },
-	{ on = "<C-g>",     run = "shell --block -- TERM=screen-256color lazygit --use-config-file=\"$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/themes_catppuccin_mocha/flamingo.yml\"", desc = "Open current folder in Lazygit" },
+	{ on = "<C-g>",     run = "shell --block -- TERM=screen-256color lazygit --use-config-file=\"$HOME/.config/lazygit/config.yml\"", desc = "Open current folder in Lazygit" },
 
 	# Linemode
 	{ on = [ "m", "s" ], run = "linemode size",        desc = "Set linemode to size"        },
