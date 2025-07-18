@@ -67,7 +67,7 @@ keymap = [
 	{ on = ";",               run = "shell --interactive",                desc = "Run a shell command"                            },
 	{ on = ":",               run = "shell --block --interactive",        desc = "Run a shell command (block until finishes)"     },
 	{ on = ".",               run = "hidden toggle",                      desc = "Toggle the visibility of hidden files"          },
-	{ on = [ "f", "f" ],      run = "plugin fzf",                         desc = "Jump to a directory or reveal a file using fzf" },
+	{ on = "<A-f>",           run = "plugin fzf",                         desc = "Jump to a directory or reveal a file using fzf" },
 	# { on = "s",               run = "search fd",                          desc = "Search files by name using fd"                            },
 	# { on = [ "f", "g" ],      run = "search rg",                          desc = "Search files by content using ripgrep"                    },
 	# { on = "<C-s>",           run = "search none",                        desc = "Cancel the ongoing search"                                },
@@ -360,3 +360,9 @@ desc = "Close the current tab and turn to left tab, or quit if it is last tab"
 on = [ "<A-u>" ]
 run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
+
+[[mgr.prepend_keymap]]
+on = "f"
+run = "plugin easyjump"
+desc = "Jump to char"
+
