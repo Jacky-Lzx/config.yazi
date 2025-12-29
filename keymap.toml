@@ -71,7 +71,7 @@ keymap = [
 	# { on = "s",               run = "search fd",                          desc = "Search files by name using fd"                            },
 	# { on = [ "f", "g" ],      run = "search rg",                          desc = "Search files by content using ripgrep"                    },
 	# { on = "<C-s>",           run = "search none",                        desc = "Cancel the ongoing search"                                },
-	# { on = "z",               run = "plugin zoxide",                      desc = "Jump to a directory using zoxide"                         },
+	# { on = "Z",               run = "plugin zoxide",                      desc = "Jump to a directory using zoxide"                         },
 	# { on = "X",               run = "unyank",                             desc = "Cancel the yank status"                                   },
 	# { on = "D",               run = "remove --permanently",               desc = "Permanently delete selected files"                        },
 	{ on = "P",               run = "paste --force",                      desc = "Paste yanked files (overwrite if the destination exists)" },

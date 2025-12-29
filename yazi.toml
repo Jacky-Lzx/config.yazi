@@ -64,8 +64,8 @@ gimp = [
 [open]
 rules = [
   # Folder
-  # { name = "*/", use = [ "edit", "open", "reveal" ] },
-  { name = "*/", use = ["open", "reveal" ] },
+  # { url = "*/", use = [ "edit", "open", "reveal" ] },
+  { url = "*/", use = ["open", "reveal" ] },
   # Text
   { mime = "text/*", use = [ "edit", "reveal" ] },
   # Image
@@ -83,13 +83,13 @@ rules = [
   # pdf
   { mime = "application/pdf", use = [ "open", "reveal" ] },
   # Microsoft files
-  { name = "*.xlsx", use = [ "open", "reveal" ] },
-  { name = "*.ppt",  use = [ "open", "reveal" ] },
-  { name = "*.pptx", use = [ "open", "reveal" ] },
-  { name = "*.doc",  use = [ "open", "reveal" ] },
-  { name = "*.docx", use = [ "open", "reveal" ] },
+  { url = "*.xlsx", use = [ "open", "reveal" ] },
+  { url = "*.ppt",  use = [ "open", "reveal" ] },
+  { url = "*.pptx", use = [ "open", "reveal" ] },
+  { url = "*.doc",  use = [ "open", "reveal" ] },
+  { url = "*.docx", use = [ "open", "reveal" ] },
   # Fallback
-  { name = "*", use = ["edit", "open", "reveal" ] },
+  { url = "*", use = ["edit", "open", "reveal" ] },
 ]
 
 [tasks]
@@ -104,7 +104,8 @@ suppress_preload = false
 
 fetchers = [
   # Mimetype
-  { id = "mime", name = "*", run = "mime", if = "!mime", prio = "high" },
+  { id = "mime", url = "*", run = "mime.local", if = "!mime", prio = "high" },
+  { id = "mime", url = "*/", run = "mime.dir", prio = "high" },
 ]
 preloaders = [
   # Image
@@ -119,7 +120,7 @@ preloaders = [
   { mime = "application/vnd.ms-opentype", run = "font" },
 ]
 previewers = [
-  { name = "*/", run = "folder" },
+  { url = "*/", run = "folder" },
   # Code
   { mime = "text/*", run = "code" },
   { mime = "*/{xml,javascript,wine-extension-ini}", run = "code" },
@@ -139,7 +140,7 @@ previewers = [
   { mime = "font/*", run = "font" },
   { mime = "application/vnd.ms-opentype", run = "font" },
   # Fallback
-  { name = "*", run = "file" },
+  { url = "*", run = "file" },
 ]
 
 # Copied from the ouch plugin: https://github.com/ndtoan96/ouch.yazi
