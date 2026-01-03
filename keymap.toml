@@ -364,5 +364,5 @@ desc = "Restore the closed tab"
 [[mgr.prepend_keymap]]
 on = "f"
 run = "plugin easyjump"
-desc = "Jump to char"
+desc = "[Easy jump]"
 

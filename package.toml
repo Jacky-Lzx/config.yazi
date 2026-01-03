@@ -1,6 +1,6 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "19dc890"
+rev = "03cdd4b"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
@@ -10,13 +10,13 @@ hash = "e519d894e94ded741e06aae4d4775981"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "19dc890"
+rev = "03cdd4b"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "Jacky-Lzx/yamb"
-rev = "4dd87ae"
-hash = "7bbf8cec0357aa7fbe1febe04c00d52"
+rev = "4bf9f92"
+hash = "67758be1587d420422dee32791018211"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
@@ -34,11 +34,11 @@ rev = "5047217"
 hash = "bb24648b1f96f1cef8c1543742189aad"
 
 [[plugin.deps]]
-use = "DreamMaoMao/easyjump"
-rev = "6606fb1"
-hash = "9209d17be3c792eda9ad60b447c4db1e"
+use = "mikavilpas/easyjump.yazi:easyjump"
+rev = "087711d"
+hash = "dee6991cbf5f04f879be03218856d65"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "3edeb49"
-hash = "14b111562c00eb1917fe3ca3ae9bb771"
+rev = "9276ffa"
+hash = "b951d27afe197d154f6da9683b46c5f8"
