@@ -14,11 +14,6 @@ rev = "03cdd4b"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
-use = "Jacky-Lzx/yamb"
-rev = "4bf9f92"
-hash = "67758be1587d420422dee32791018211"
-
-[[plugin.deps]]
 use = "ndtoan96/ouch"
 rev = "cfb9140"
 hash = "b5067143415bd2d46c0dfa57319ddcef"
@@ -37,6 +32,11 @@ hash = "bb24648b1f96f1cef8c1543742189aad"
 use = "mikavilpas/easyjump.yazi:easyjump"
 rev = "087711d"
 hash = "dee6991cbf5f04f879be03218856d65"
+
+[[plugin.deps]]
+use = "Jacky-Lzx/bookmark"
+rev = "4bf9f92"
+hash = "67758be1587d420422dee32791018211"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"

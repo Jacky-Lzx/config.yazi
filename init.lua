@@ -37,7 +37,7 @@ table.insert(bookmarks, {
   key = "d",
 })
 
-require("yamb"):setup({
+require("bookmark"):setup({
   -- Optional, the path ending with path separator represents folder.
   bookmarks = bookmarks,
   -- Optional, the cli of fzf.
