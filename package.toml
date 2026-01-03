@@ -24,11 +24,6 @@ rev = "7634ae0"
 hash = "a2fd993a6c7517d60826caaccf84e296"
 
 [[plugin.deps]]
-use = "MasouShizuka/close-and-restore-tab"
-rev = "5047217"
-hash = "bb24648b1f96f1cef8c1543742189aad"
-
-[[plugin.deps]]
 use = "mikavilpas/easyjump.yazi:easyjump"
 rev = "087711d"
 hash = "dee6991cbf5f04f879be03218856d65"
@@ -37,6 +32,11 @@ hash = "dee6991cbf5f04f879be03218856d65"
 use = "Jacky-Lzx/bookmark"
 rev = "4bf9f92"
 hash = "67758be1587d420422dee32791018211"
+
+[[plugin.deps]]
+use = "Jacky-Lzx/close-and-restore-tab"
+rev = "5047217"
+hash = "bb24648b1f96f1cef8c1543742189aad"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
