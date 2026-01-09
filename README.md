@@ -2,6 +2,8 @@
 
 My yazi config.
 
+![Demo](assets/imgs/Demo.avif)
+
 ## Installation
 
 - Use `git submodule update --init --recursive` to initialize submodules
