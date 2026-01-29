@@ -22,8 +22,23 @@ rules = [
   { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#f5c2e7" },
   { mime = "application/{tar,bzip*,7z-compressed,xz,rar}", fg = "#f5c2e7" },
 
+  { url = "*.git{ignore,modules,attributes}", fg = "#fab387" },
+  { url = "*.git/", fg = "#fab387" },
+  { url = "*LICENSE", fg = "#f9e2af" },
+  { url = "*.md", fg = "#f38ba8" },
+
+  { url = "*.ds_store", fg = "#6c7086" },
+
+
   # Documents
-  { mime = "application/{pdf,doc,rtf}", fg = "#a6e3a1" },
+  # { mime = "application/{pdf,doc,docx,rtf,xls,xlsx}", fg = "#a6e3a1" },
+  # Microsoft temporary files
+  { url = "*~$*.{ppt,pptx,doc,docx,xls,xlsx}", fg = "#6c7086" },
+
+  { url = "*.{xls,xlsx}", fg = "#a6e3a1" },
+  { url = "*.{doc,docx}", fg = "#89dceb" },
+  { url = "*.{ppt,pptx}", fg = "#f38ba8" },
+  { url = "*.pdf", fg = "#94e2d5" },
 
   # Virtual file system
   { mime = "vfs/{absent,stale}", fg = "#45475a" },
@@ -246,7 +261,7 @@ exts = [
   { name = "webpack", text = "󰜫", fg = "#74c7ec" },
   { name = "dart", text = "", fg = "#585b70" },
   { name = "vsh", text = "", fg = "#7f849c" },
-  { name = "doc", text = "󰈬", fg = "#585b70" },
+  { name = "doc", text = "󰈬", fg = "#89dceb" },
   { name = "zsh", text = "", fg = "#a6e3a1" },
   { name = "ex", text = "", fg = "#7f849c" },
   { name = "hx", text = "", fg = "#fab387" },
@@ -278,7 +293,7 @@ exts = [
   { name = "rmd", text = "", fg = "#74c7ec" },
   { name = "wv", text = "", fg = "#74c7ec" },
   { name = "xml", text = "󰗀", fg = "#fab387" },
-  { name = "markdown", text = "", fg = "#cdd6f4" },
+  { name = "markdown", text = "", fg = "#f38ba8" },
   { name = "qml", text = "", fg = "#a6e3a1" },
   { name = "3gp", text = "", fg = "#fab387" },
   { name = "pxi", text = "", fg = "#89b4fa" },
@@ -308,7 +323,7 @@ exts = [
   { name = "ebook", text = "", fg = "#fab387" },
   { name = "kra", text = "", fg = "#cba6f7" },
   { name = "tf", text = "", fg = "#585b70" },
-  { name = "xls", text = "󰈛", fg = "#585b70" },
+  { name = "xls", text = "󰈛", fg = "#a6e3a1" },
   { name = "fnl", text = "", fg = "#f9e2af" },
   { name = "kdbx", text = "", fg = "#a6e3a1" },
   { name = "kicad_pcb", text = "", fg = "#f5e0dc" },
@@ -345,7 +360,7 @@ exts = [
   { name = "fcmat", text = "", fg = "#f38ba8" },
   { name = "pot", text = "", fg = "#74c7ec" },
   { name = "bin", text = "", fg = "#45475a" },
-  { name = "xlsx", text = "󰈛", fg = "#585b70" },
+  { name = "xlsx", text = "󰈛", fg = "#a6e3a1" },
   { name = "aac", text = "", fg = "#74c7ec" },
   { name = "kicad_sym", text = "", fg = "#f5e0dc" },
   { name = "xcstrings", text = "", fg = "#74c7ec" },
@@ -583,7 +598,7 @@ exts = [
   { name = "pl", text = "", fg = "#74c7ec" },
   { name = "ads", text = "", fg = "#f5e0dc" },
   { name = "sqlite", text = "", fg = "#f5e0dc" },
-  { name = "pdf", text = "", fg = "#a6e3a1" },
+  { name = "pdf", text = "", fg = "#94e2d5" },
   { name = "pcm", text = "", fg = "#6c7086" },
   { name = "ico", text = "", fg = "#f9e2af" },
   { name = "a", text = "", fg = "#f5e0dc" },
@@ -625,7 +640,7 @@ exts = [
   { name = "qrc", text = "", fg = "#a6e3a1" },
   { name = "lua", text = "", fg = "#74c7ec" },
   { name = "lhs", text = "", fg = "#7f849c" },
-  { name = "md", text = "", fg = "#cdd6f4" },
+  { name = "md", text = "", fg = "#f38ba8" },
   { name = "leex", text = "", fg = "#7f849c" },
   { name = "ai", text = "", fg = "#f9e2af" },
   { name = "lck", text = "", fg = "#bac2de" },
@@ -679,7 +694,7 @@ exts = [
   { name = "fodg", text = "", fg = "#f9e2af" },
   { name = "svg", text = "󰜡", fg = "#fab387" },
   { name = "dwg", text = "󰻫", fg = "#a6e3a1" },
-  { name = "docx", text = "󰈬", fg = "#585b70" },
+  { name = "docx", text = "󰈬", fg = "#89dceb" },
   { name = "pro", text = "", fg = "#f9e2af" },
   { name = "db", text = "", fg = "#f5e0dc" },
   { name = "rb", text = "", fg = "#313244" },
