@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "de33976"
-hash = "3996fc74044bc44144b323686f887e1"
+rev = "1962818"
+hash = "6fa6a05a81c98dd000fbca3cca6e9682"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
@@ -10,8 +10,8 @@ hash = "e519d894e94ded741e06aae4d4775981"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "de33976"
-hash = "8a7c58225816a163a6e8730c0adafbc8"
+rev = "1962818"
+hash = "4c0260feb50ea2437380690ffc241da7"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
@@ -25,13 +25,13 @@ hash = "a2fd993a6c7517d60826caaccf84e296"
 
 [[plugin.deps]]
 use = "mikavilpas/easyjump.yazi:easyjump"
-rev = "97af8d6"
+rev = "40851c2"
 hash = "dee6991cbf5f04f879be03218856d65"
 
 [[plugin.deps]]
 use = "Jacky-Lzx/bookmark"
-rev = "4bf9f92"
-hash = "67758be1587d420422dee32791018211"
+rev = "b3ec51c"
+hash = "6e09b51dbab3b9db3ca1da46eff415d9"
 
 [[plugin.deps]]
 use = "Jacky-Lzx/close-and-restore-tab"
@@ -40,5 +40,5 @@ hash = "bb24648b1f96f1cef8c1543742189aad"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "ca61658"
+rev = "575a48f"
 hash = "8eabb4e88096f10905a6df62cfaadbf4"
