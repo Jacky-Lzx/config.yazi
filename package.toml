@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "1962818"
-hash = "6fa6a05a81c98dd000fbca3cca6e9682"
+rev = "ac82af3"
+hash = "eff8ff12fa4e5f035a10d8aeeb4c258d"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
@@ -10,7 +10,7 @@ hash = "635b0feb9215772d22020eb0abf0bb34"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "1962818"
+rev = "ac82af3"
 hash = "4c0260feb50ea2437380690ffc241da7"
 
 [[plugin.deps]]
@@ -20,12 +20,12 @@ hash = "f5afc904d5106ee368c8aa2ded43bd74"
 
 [[plugin.deps]]
 use = "Jacky-Lzx/lzx"
-rev = "7634ae0"
-hash = "a2fd993a6c7517d60826caaccf84e296"
+rev = "80f4028"
+hash = "9594efd125e90fe22bee13b9e5fa29b5"
 
 [[plugin.deps]]
 use = "mikavilpas/easyjump.yazi:easyjump"
-rev = "96baab7"
+rev = "ed8d53b"
 hash = "dee6991cbf5f04f879be03218856d65"
 
 [[plugin.deps]]
@@ -40,5 +40,5 @@ hash = "bb24648b1f96f1cef8c1543742189aad"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "9511cb0"
+rev = "0670801"
 hash = "7dfe41c9c3d9be76da8a844263d0bbed"

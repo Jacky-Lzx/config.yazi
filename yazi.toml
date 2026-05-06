@@ -1,6 +1,7 @@
-# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# A TOML linter such as https://github.com/tombi-toml/tombi can use this schema to validate your config.
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+#:schema https://yazi-rs.github.io/schemas/yazi.json
 
 [mgr]
 ratio          = [1, 4, 3]
@@ -50,6 +51,10 @@ extract = [
   { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
   { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
 ]
+download = [
+  { run = "ya emit download --open %S", desc = "Download and open" },
+  { run = "ya emit download %S", desc = "Download" },
+]
 play = [
   { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
   { run = 'mpv --force-window %*', orphan = true, for = "windows" },
@@ -61,7 +66,6 @@ acrobat = [{ run = 'open -a "Adobe Acrobat" "$@"', orphan = true, desc = "Acroba
 [open]
 rules = [
   # Folder
-  # { url = "*/", use = [ "edit", "open", "reveal" ] },
   { url = "*/", use = ["open", "reveal"] },
   # Text
   { mime = "text/*", use = ["edit", "reveal"] },
@@ -70,8 +74,7 @@ rules = [
   # Media
   { mime = "{audio,video}/*", use = ["open", "play", "reveal"] },
   # Archive
-  { mime = "application/{,g}zip", use = ["extract", "reveal"] },
-  { mime = "application/{tar,bzip*,7z-compressed,xz,rar}", use = ["extract", "reveal"] },
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = ["extract", "reveal"] },
   # JSON
   { mime = "application/{json,ndjson}", use = ["edit", "reveal"] },
   { mime = "*/javascript", use = ["edit", "reveal"] },
@@ -79,6 +82,8 @@ rules = [
   { mime = "inode/empty", use = ["edit", "reveal"] },
   # pdf
   { mime = "application/pdf", use = ["open", "acrobat", "reveal"] },
+  # Virtual file system
+  { mime = "vfs/{absent,stale}", use = "download" },
   # Microsoft files
   { url = "*.xlsx", use = ["open", "reveal"] },
   { url = "*.ppt", use = ["open", "reveal"] },
@@ -87,6 +92,7 @@ rules = [
   { url = "*.docx", use = ["open", "reveal"] },
   # Fallback
   { url = "*", use = ["edit", "open", "reveal"] },
+
 ]
 
 [tasks]
@@ -100,9 +106,10 @@ suppress_preload = false
 [plugin]
 
 fetchers = [
-  # Mimetype
-  { id = "mime", url = "*", run = "mime.local", if = "!mime", prio = "high" },
-  { id = "mime", url = "*/", run = "mime.dir", prio = "high" },
+  # MIME-type
+  { url = "*/", run = "mime.dir", prio = "high", group = "mime" },
+  { url = "local://*", run = "mime.local", prio = "high", group = "mime" },
+  { url = "remote://*", run = "mime.remote", prio = "high", group = "mime" },
 ]
 preloaders = [
   # Image
@@ -170,16 +177,6 @@ rename_title  = "Rename:"
 rename_origin = "hovered"
 rename_offset = [0, 1, 50, 3]
 
-# trash
-trash_title  = "Move {n} selected file{s} to trash? (y/N)"
-trash_origin = "top-center"
-trash_offset = [0, 2, 50, 3]
-
-# delete
-delete_title  = "Delete {n} selected file{s} permanently? (y/N)"
-delete_origin = "top-center"
-delete_offset = [0, 2, 50, 3]
-
 # filter
 filter_title  = "Filter:"
 filter_origin = "top-center"
@@ -200,15 +197,28 @@ shell_title  = ["Shell:", "Shell (block):"]
 shell_origin = "top-center"
 shell_offset = [0, 2, 50, 3]
 
+[confirm]
+# trash
+trash_title  = "Trash {n} selected file{s}?"
+trash_origin = "center"
+trash_offset = [0, 0, 70, 20]
+
+# delete
+delete_title  = "Permanently delete {n} selected file{s}?"
+delete_origin = "center"
+delete_offset = [0, 0, 70, 20]
+
 # overwrite
-overwrite_title  = "Overwrite an existing file? (y/N)"
-overwrite_origin = "top-center"
-overwrite_offset = [0, 2, 50, 3]
+overwrite_title  = "Overwrite file?"
+overwrite_body   = "Will overwrite the following file:"
+overwrite_origin = "center"
+overwrite_offset = [0, 0, 50, 15]
 
 # quit
-quit_title  = "{n} task{s} running, sure to quit? (y/N)"
-quit_origin = "top-center"
-quit_offset = [0, 2, 50, 3]
+quit_title  = "Quit?"
+quit_body   = "There are unfinished tasks, quit anyway?\n(Open task manager with default key 'w')"
+quit_origin = "center"
+quit_offset = [0, 0, 50, 15]
 
 [pick]
 open_title  = "Open with:"
