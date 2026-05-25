@@ -7,7 +7,7 @@
 
 keymap = [
   { on = "<Esc>", run = "escape", desc = "Exit visual mode, clear selected, or cancel search" },
-  # { on = "q", run = "close", desc = "Close the current tab, or quit if it is last tab" },
+  { on = "q", run = "close", desc = "Close the current tab, or quit if it is last tab" },
   { on = "<C-c>", run = "quit", desc = "Exit the process" },
   # { on = "Q", run = "quit --no-cwd-file", desc = "Exit the process without writing cwd-file" },
   # { on = "<C-z>", run = "suspend", desc = "Suspend the process" },
@@ -134,8 +134,9 @@ keymap = [
 
   # Tabs
   { on = "<A-n>", run = "tab_create --current", desc = "Create a new tab with CWD" },
-  # { on = "<A-q>", run = "close",                    desc = "Close the current tab"              },
-  # { on = "<A-w>", run = "close",                    desc = "Close the current tab"              },
+  { on = "<A-w>", run = "close", desc = "Close the current tab, or quit if it is last tab" },
+  { on = "<A-q>", run = "close", desc = "Close the current tab, or quit if it is last tab" },
+
   { on = "<A-1>", run = "tab_switch 0", desc = "Switch to the first tab" },
   { on = "<A-2>", run = "tab_switch 1", desc = "Switch to the second tab" },
   { on = "<A-3>", run = "tab_switch 2", desc = "Switch to the third tab" },
@@ -319,18 +320,21 @@ desc = "Add bookmark"
 on   = "<C-k>"
 run  = "plugin bookmark jump_by_fzf"
 desc = "Jump bookmark by fzf"
+
 # Close input by once `Esc` press
 #   https://yazi-rs.github.io/docs/tips/#close-input-by-esc
 [[input.prepend_keymap]]
 on   = "<Esc>"
 run  = "close"
 desc = "Cancel input"
+
 [[mgr.prepend_keymap]]
 on  = "["
 run = "plugin parent-arrow -1"
 [[mgr.prepend_keymap]]
 on  = "]"
 run = "plugin parent-arrow 1"
+
 # [[mgr.prepend_keymap]]
 # on   = "l"
 # run  = "plugin smart-enter"
@@ -346,21 +350,6 @@ desc = "Show or hide the preview pane"
 on   = "i"
 run  = "plugin toggle-pane max-preview"
 desc = "Maximize or restore the preview pane"
-
-[[mgr.prepend_keymap]]
-on   = ["q"]
-run  = "plugin close-and-restore-tab close_to_right"
-desc = "Close the current tab and turn to right tab, or quit if it is last tab"
-
-[[mgr.prepend_keymap]]
-on   = ["<A-w>"]
-run  = "plugin close-and-restore-tab close_to_right"
-desc = "Close the current tab and turn to right tab, or quit if it is last tab"
-
-[[mgr.prepend_keymap]]
-on   = ["<A-q>"]
-run  = "plugin close-and-restore-tab close_to_right"
-desc = "Close the current tab and turn to right tab, or quit if it is last tab"
 
 [[mgr.prepend_keymap]]
 on   = ["<A-u>"]
