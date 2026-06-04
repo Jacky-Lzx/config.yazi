@@ -33,31 +33,23 @@ ueberzug_offset = [0, 0, 0, 0]
 edit = [
   { run = '${EDITOR:=nvim} "$@"', desc = "Nvim", block = true, for = "unix" },
   { run = 'neovide "$@"', orphan = true, desc = "Neovide", for = "macos" },
-  { run = 'code %*', orphan = true, desc = "Code", for = "windows" },
-  { run = 'code -w %*', block = true, desc = "Code (block)", for = "windows" },
 ]
 open = [
-  { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
+  # { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
   { run = 'open "$@"', desc = "Open", for = "macos" },
-  { run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
 ]
 reveal = [
-  { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
+  # { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
   { run = 'open -R "$1"', desc = "Reveal", for = "macos" },
-  { run = 'explorer /select,"%1"', orphan = true, desc = "Reveal", for = "windows" },
-  { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+  # { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
 ]
-extract = [
-  { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
-  { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
-]
+extract = [{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" }]
 download = [
   { run = "ya emit download --open %S", desc = "Download and open" },
   { run = "ya emit download %S", desc = "Download" },
 ]
 play = [
   { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
-  { run = 'mpv --force-window %*', orphan = true, for = "windows" },
   { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 gimp = [{ run = 'gimp "$@"', orphan = true, desc = "GIMP", for = "macos" }]
