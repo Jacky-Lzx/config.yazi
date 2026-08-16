@@ -31,29 +31,29 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [
-  { run = '${EDITOR:=nvim} "$@"', desc = "Nvim", block = true, for = "unix" },
-  { run = 'neovide "$@"', orphan = true, desc = "Neovide", for = "macos" },
+  { run = "${EDITOR:-vi} %s", desc = "$EDITOR", for = "unix", block = true },
+  { run = 'neovide %s', orphan = true, desc = "Neovide", for = "macos" },
 ]
 open = [
-  # { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
-  { run = 'open "$@"', desc = "Open", for = "macos" },
+  # { run = 'xdg-open "%1"', desc = "Open", for = "linux" },
+  { run = 'open %s', desc = "Open", for = "macos" },
 ]
 reveal = [
-  # { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
-  { run = 'open -R "$1"', desc = "Reveal", for = "macos" },
-  # { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+  # { run = 'xdg-open "$(dirname "%1")"', desc = "Reveal", for = "linux" },
+  { run = 'open -R %s1', desc = "Reveal", for = "macos" },
+  # { run = '''exiftool "%1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
 ]
-extract = [{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" }]
+extract = [{ run = 'ya pub extract --list "%s"', desc = "Extract here", for = "unix" }]
 download = [
   { run = "ya emit download --open %S", desc = "Download and open" },
   { run = "ya emit download %S", desc = "Download" },
 ]
 play = [
-  { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
-  { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+  { run = 'mpv --force-window "%s"', orphan = true, for = "unix" },
+  { run = '''mediainfo "%1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
-gimp = [{ run = 'gimp "$@"', orphan = true, desc = "GIMP", for = "macos" }]
-acrobat = [{ run = 'open -a "Adobe Acrobat" "$@"', orphan = true, desc = "Acrobat", for = "macos" }]
+gimp = [{ run = 'gimp "%s"', orphan = true, desc = "GIMP", for = "macos" }]
+acrobat = [{ run = 'open -a "Adobe Acrobat" "%s"', orphan = true, desc = "Acrobat", for = "macos" }]
 
 [open]
 rules = [
@@ -88,11 +88,14 @@ rules = [
 ]
 
 [tasks]
-micro_workers    = 10
-macro_workers    = 25
-bizarre_retry    = 5
-image_alloc      = 536870912 # 512MB
-image_bound      = [0, 0]
+file_workers     = 3
+plugin_workers   = 5
+fetch_workers    = 5
+preload_workers  = 2
+process_workers  = 5
+bizarre_retry    = 3
+image_alloc      = 536870912      # 512MB
+image_bound      = [10000, 10000]
 suppress_preload = false
 
 [plugin]
