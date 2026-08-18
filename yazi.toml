@@ -1,5 +1,5 @@
-# A TOML linter such as https://github.com/tombi-toml/tombi can use this schema to validate your config.
-# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+# A TOML linter such as Tombi can use this schema to validate your config.
+# If you encounter any problems, please file an issue at https://github.com/yazi-rs/schemas.
 
 #:schema https://yazi-rs.github.io/schemas/yazi.json
 
@@ -10,22 +10,22 @@ sort_sensitive = false
 sort_reverse   = false
 sort_dir_first = true
 sort_translit  = false
+sort_fallback  = "alphabetical"
 linemode       = "none"
 show_hidden    = true
 show_symlink   = true
 scrolloff      = 5
-# Enable the mouse support. Sometimes, it conflicts with tmux and the image preview will disappear when mouse moves.
-# Therefore, the mouse move event is not used.
-mouse_events = ["click", "scroll"]
+mouse_events   = ["click", "scroll", "drag"]
 
 [preview]
 wrap            = "no"
 tab_size        = 2
 max_width       = 1200
 max_height      = 1600
+cache_dir       = ""
+image_delay     = 100
 image_filter    = "triangle"
 image_quality   = 75
-image_delay     = 100
 ueberzug_scale  = 1
 ueberzug_offset = [0, 0, 0, 0]
 
@@ -33,24 +33,33 @@ ueberzug_offset = [0, 0, 0, 0]
 edit = [
   { run = "${EDITOR:-vi} %s", desc = "$EDITOR", for = "unix", block = true },
   { run = 'neovide %s', orphan = true, desc = "Neovide", for = "macos" },
+  { run = "code %s", desc = "code", for = "windows", orphan = true },
+  { run = "code -w %s", desc = "code (block)", for = "windows", block = true },
 ]
 open = [
-  # { run = 'xdg-open "%1"', desc = "Open", for = "linux" },
-  { run = 'open %s', desc = "Open", for = "macos" },
+  # Disable the open command on linux to avoid opening X11 windows on the remote server
+  # { run = "xdg-open %s1", desc = "Open", for = "linux" },
+  { run = "open %s", desc = "Open", for = "macos" },
+  { run = 'start "" %s1', desc = "Open", for = "windows", orphan = true },
+]
+play = [
+  { run = "xdg-open %s1", desc = "Play", for = "linux", orphan = true },
+  { run = "open %s", desc = "Play", for = "macos" },
+  { run = 'start "" %s1', desc = "Play", for = "windows", orphan = true },
+  { run = "termux-open %s1", desc = "Play", for = "android" },
+  { run = "mediainfo %s1; echo 'Press enter to exit'; read _", block = true, desc = "Show media info", for = "unix" },
+  { run = "mediainfo %s1 & pause", block = true, desc = "Show media info", for = "windows" },
 ]
 reveal = [
-  # { run = 'xdg-open "$(dirname "%1")"', desc = "Reveal", for = "linux" },
-  { run = 'open -R %s1', desc = "Reveal", for = "macos" },
-  # { run = '''exiftool "%1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+  # { run = "xdg-open %d1",         desc = "Reveal", for = "linux" },
+  { run = "open -R %s1", desc = "Reveal", for = "macos" },
+  { run = "explorer /select,%s1", desc = "Reveal", for = "windows", orphan = true },
+  { run = "clear; exiftool %s1; echo 'Press enter to exit'; read _", desc = "Show EXIF", for = "unix", block = true },
 ]
-extract = [{ run = 'ya pub extract --list "%s"', desc = "Extract here", for = "unix" }]
+extract = [{ run = "ya pub extract --list %s", desc = "Extract here" }]
 download = [
   { run = "ya emit download --open %S", desc = "Download and open" },
   { run = "ya emit download %S", desc = "Download" },
-]
-play = [
-  { run = 'mpv --force-window "%s"', orphan = true, for = "unix" },
-  { run = '''mediainfo "%1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 gimp = [{ run = 'gimp "%s"', orphan = true, desc = "GIMP", for = "macos" }]
 acrobat = [{ run = 'open -a "Adobe Acrobat" "%s"', orphan = true, desc = "Acrobat", for = "macos" }]
@@ -58,7 +67,6 @@ trash = [
   { run = "ya pub trash-restore --list %S", desc = "Restore selected files" },
   # { run = "ya pub trash-empty --list %S", desc = "Empty trash bin" },
 ]
-
 
 [open]
 rules = [
@@ -70,11 +78,10 @@ rules = [
   { mime = "image/*", use = ["open", "reveal", "gimp"] },
   # Media
   { mime = "{audio,video}/*", use = ["open", "play", "reveal"] },
+  # Code
+  { mime = "application/{json,ndjson,javascript,wine-extension-ini}", use = ["edit", "reveal"] },
   # Archive
   { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = ["extract", "reveal"] },
-  # JSON
-  { mime = "application/{json,ndjson}", use = ["edit", "reveal"] },
-  { mime = "*/javascript", use = ["edit", "reveal"] },
   # Empty file
   { mime = "inode/empty", use = ["edit", "reveal"] },
   # pdf
@@ -140,16 +147,17 @@ spotters = [
 preloaders = [
   # Image
   { mime = "image/{avif,heic,jxl,svg+xml}", run = "magick" },
+  { mime = "image/svg+xml", run = "svg" },
   { mime = "image/*", run = "image" },
   # Video
   { mime = "video/*", run = "video" },
   # PDF
   { mime = "application/pdf", run = "pdf" },
-  # Trash
-  { mime = "trash/**", run = "trash" },
   # Font
   { mime = "font/*", run = "font" },
   { mime = "application/vnd.ms-opentype", run = "font" },
+  # Trash
+  { mime = "trash/**", run = "trash" },
 ]
 previewers = [
   { url = "*/", run = "folder" },
@@ -160,21 +168,34 @@ previewers = [
   { mime = "application/{json,ndjson}", run = "json" },
   # Image
   { mime = "image/{avif,heic,jxl,svg+xml}", run = "magick" },
+  { mime = "image/svg+xml", run = "svg" },
   { mime = "image/*", run = "image" },
   # Video
   { mime = "video/*", run = "video" },
   # PDF
   { mime = "application/pdf", run = "pdf" },
   # Archive
-  { mime = "application/{,g}zip", run = "archive" },
-  { mime = "application/{tar,bzip*,7z-compressed,xz,rar,iso9660-image}", run = "archive" },
-  # Trash
-  { mime = "trash/**", run = "trash" },
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "archive" },
+  { mime = "application/{debian*-package,redhat-package-manager,rpm,android.package-archive}", run = "archive" },
+  { url = "*.{AppImage,appimage}", run = "archive" },
+  # Virtual Disk / Disk Image
+  { mime = "application/{iso9660-image,qemu-disk,ms-wim,apple-diskimage}", run = "archive" },
+  { mime = "application/virtualbox-{vhd,vhdx}", run = "archive" },
+  { url = "*.{img,fat,ext,ext2,ext3,ext4,squashfs,ntfs,hfs,hfsx}", run = "archive" },
   # Font
   { mime = "font/*", run = "font" },
   { mime = "application/vnd.ms-opentype", run = "font" },
+  # Empty file
+  { mime = "inode/empty", run = "empty" },
+  # Virtual file system
+  { mime = "vfs/*", run = "vfs" },
+  # Trash
+  { mime = "trash/**", run = "trash" },
+  # Error
+  { mime = "null/*", run = "null" },
   # Fallback
   { url = "*", run = "file" },
+
 ]
 
 # Copied from the ouch plugin: https://github.com/ndtoan96/ouch.yazi
