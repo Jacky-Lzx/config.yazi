@@ -130,6 +130,7 @@ keymap = [
   { on = ["g", "c"], run = "cd ~/.config", desc = "Go to the config directory" },
   { on = ["g", "d", "l"], run = "cd ~/Downloads", desc = "Go to the downloads directory" },
   { on = ["g", "d", "c"], run = "cd ~/Documents", desc = "Go to the documents directory" },
+  { on = ["g", "t"], run = "plugin trash", desc = "Go to trash bin" },
   # { on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
 
   # Tabs

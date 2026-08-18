@@ -54,6 +54,11 @@ play = [
 ]
 gimp = [{ run = 'gimp "%s"', orphan = true, desc = "GIMP", for = "macos" }]
 acrobat = [{ run = 'open -a "Adobe Acrobat" "%s"', orphan = true, desc = "Acrobat", for = "macos" }]
+trash = [
+  { run = "ya pub trash-restore --list %S", desc = "Restore selected files" },
+  # { run = "ya pub trash-empty --list %S", desc = "Empty trash bin" },
+]
+
 
 [open]
 rules = [
@@ -82,6 +87,8 @@ rules = [
   { url = "*.pptx", use = ["open", "reveal"] },
   { url = "*.doc", use = ["open", "reveal"] },
   { url = "*.docx", use = ["open", "reveal"] },
+  # Trash
+  { mime = "trash/**", use = ["open", "trash"] },
   # Fallback
   { url = "*", use = ["edit", "open", "reveal"] },
 
@@ -104,7 +111,31 @@ fetchers = [
   # MIME-type
   { url = "*/", run = "mime.dir", prio = "high", group = "mime" },
   { url = "local://*", run = "mime.local", prio = "high", group = "mime" },
+  { url = "trash://*", run = "mime.trash", prio = "high", group = "mime" },
   { url = "remote://*", run = "mime.remote", prio = "high", group = "mime" },
+]
+spotters = [
+  # Multi-file
+  { mime = "multi/*", run = "multi" },
+  # Trash
+  { mime = "trash/**", run = "trash" },
+  # Folder
+  { url = "*/", run = "folder" },
+  # Code
+  { mime = "text/*", run = "code" },
+  { mime = "application/{mbox,javascript,wine-extension-ini}", run = "code" },
+  # Image
+  { mime = "image/{avif,hei?,jxl}", run = "magick" },
+  { mime = "image/svg+xml", run = "svg" },
+  { mime = "image/*", run = "image" },
+  # Video
+  { mime = "video/*", run = "video" },
+  # Virtual file system
+  { mime = "vfs/*", run = "vfs" },
+  # Error
+  { mime = "null/*", run = "null" },
+  # Fallback
+  { url = "*", run = "file" },
 ]
 preloaders = [
   # Image
@@ -114,6 +145,8 @@ preloaders = [
   { mime = "video/*", run = "video" },
   # PDF
   { mime = "application/pdf", run = "pdf" },
+  # Trash
+  { mime = "trash/**", run = "trash" },
   # Font
   { mime = "font/*", run = "font" },
   { mime = "application/vnd.ms-opentype", run = "font" },
@@ -135,6 +168,8 @@ previewers = [
   # Archive
   { mime = "application/{,g}zip", run = "archive" },
   { mime = "application/{tar,bzip*,7z-compressed,xz,rar,iso9660-image}", run = "archive" },
+  # Trash
+  { mime = "trash/**", run = "trash" },
   # Font
   { mime = "font/*", run = "font" },
   { mime = "application/vnd.ms-opentype", run = "font" },
