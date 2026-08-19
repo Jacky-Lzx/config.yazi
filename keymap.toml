@@ -86,8 +86,8 @@ keymap = [
   { on = ".", run = "hidden toggle", desc = "Toggle the visibility of hidden files" },
   { on = "<A-f>", run = "plugin fzf", desc = "Jump to a directory or reveal a file using fzf" },
   { on = "s", run = "search --via=fd", desc = "Search files by name via fd" },
-  { on = "S", run = "search --via=rg", desc = "Search files by content via ripgrep" },
-  { on = "<C-s>", run = "escape --search", desc = "Cancel the ongoing search" },
+  { on = "<C-s>", run = "search --via=rg", desc = "Search files by content via ripgrep" },
+  # { on = "<C-s>", run = "escape --search", desc = "Cancel the ongoing search" },
 
   # Custom
   { on = ["c", "l"], run = "plugin lzx latex_clean", desc = "Clean LaTeX files" },
